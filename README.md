@@ -1,4 +1,4 @@
-# Tasklist BLoC
+# Task List BLoC
 
 A basic introduction to state management in flutter apps using BLoC (Business Logic Component) design pattern.
 
@@ -6,10 +6,10 @@ A basic introduction to state management in flutter apps using BLoC (Business Lo
 
 - List all tasks
 - Create a new tasks
-- Complete a task
+- Mark task as complete
 - List all completed tasks
 - Clear completed tasks
-- Uncomplete a task
+- Mark task as incomplete
 
 ## Getting Started with Flutter
 

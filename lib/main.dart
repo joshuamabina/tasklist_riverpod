@@ -34,7 +34,8 @@ class _TasksState extends State<Tasks> {
 
   void _createTask() {
     setState(() {
-      // TODO
+      String newTask = 'New random task ${_tasks.length + 1}';
+      _tasks.add(newTask);
     });
   }
 
@@ -49,7 +50,7 @@ class _TasksState extends State<Tasks> {
       ? ListView.builder(
           itemCount: _tasks.length,
           itemBuilder: (BuildContext context, int index) {
-        return ListTile(title: Text(_tasks[index]));
+            return ListTile(title: Text(_tasks[index]));
       })
       : const Center(
         child: Column(
@@ -61,10 +62,37 @@ class _TasksState extends State<Tasks> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _createTask,
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          showModalBottomSheet<void>(
+              context: context,
+              builder: (BuildContext context) {
+                return const SizedBox(
+                  height: 100,
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Padding(
+                          padding: EdgeInsets.all(16.0),
+                          child: TextField(
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                              hintText: 'New task',
+                            ),
+                          ),
+                        )
+                      ]
+                    )
+                  ),
+                );
+              }
+          );
+        },
         tooltip: 'New task',
-        child: const Icon(Icons.add),
+        label: const Text('New task'),
+        icon: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
