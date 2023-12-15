@@ -30,7 +30,7 @@ class Tasks extends StatefulWidget {
 }
 
 class _TasksState extends State<Tasks> {
-  final String _tasks = 'Buy milk';
+  final List<String> _tasks = ['Buy milk', 'Drink coffee', 'Build something amazing'];
 
   void _createTask() {
     setState(() {
@@ -45,16 +45,18 @@ class _TasksState extends State<Tasks> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      body: Center(
+      body: _tasks.isNotEmpty
+      ? ListView.builder(
+          itemCount: _tasks.length,
+          itemBuilder: (BuildContext context, int index) {
+        return ListTile(title: Text(_tasks[index]));
+      })
+      : const Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You only have one thing to do:',
-            ),
             Text(
-              _tasks,
-              style: Theme.of(context).textTheme.headlineMedium,
+              'No tasks yet!',
             ),
           ],
         ),
