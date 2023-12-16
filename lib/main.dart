@@ -32,10 +32,9 @@ class Tasks extends StatefulWidget {
 class _TasksState extends State<Tasks> {
   final List<String> _tasks = ['Buy milk', 'Drink coffee', 'Build something amazing'];
 
-  void _createTask() {
+  void _createTask(value) {
     setState(() {
-      String newTask = 'New random task ${_tasks.length + 1}';
-      _tasks.add(newTask);
+      _tasks.add(value);
     });
   }
 
@@ -67,7 +66,7 @@ class _TasksState extends State<Tasks> {
           showModalBottomSheet<void>(
               context: context,
               builder: (BuildContext context) {
-                return const SizedBox(
+                return SizedBox(
                   height: 100,
                   child: Center(
                     child: Column(
@@ -75,9 +74,13 @@ class _TasksState extends State<Tasks> {
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
                         Padding(
-                          padding: EdgeInsets.all(16.0),
+                          padding: const EdgeInsets.all(16.0),
                           child: TextField(
-                            decoration: InputDecoration(
+                            onSubmitted: (value) {
+                              _createTask(value);
+                              Navigator.of(context).pop();
+                            },
+                            decoration: const InputDecoration(
                               border: InputBorder.none,
                               hintText: 'New task',
                             ),
