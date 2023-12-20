@@ -49,10 +49,15 @@ class _TasksState extends State<Tasks> {
       ? ListView.builder(
           itemCount: _tasks.length,
           itemBuilder: (BuildContext context, int index) {
-            return CheckboxListTile(
+            return ListTile(
+              leading: Checkbox(
+                value: false,
+                onChanged: (bool? value) {
+                  // TODO
+                },
+              ),
               title: Text(_tasks[index]),
-              value: false,
-              onChanged: (bool? value) {
+              onTap: () {
                 // TODO
               },
             );
