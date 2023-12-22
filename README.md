@@ -10,6 +10,7 @@ A basic introduction to state management in flutter apps using BLoC (Business Lo
 - List all completed tasks
 - Clear completed tasks
 - Mark task as incomplete
+- Add task description
 
 ## Getting Started with Flutter
 
