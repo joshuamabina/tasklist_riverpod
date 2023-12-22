@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -30,12 +32,33 @@ class Tasks extends StatefulWidget {
 }
 
 class _TasksState extends State<Tasks> {
-  final List<String> _tasks = ['Buy milk', 'Drink coffee', 'Build something amazing'];
+  final List<Task> _tasks = <Task>[Task('Buy milk', isCompleted: true), Task('Drink coffee'), Task('Build something amazing')];
 
-  void _createTask(value) {
+  void _createTask(newTask) {
     setState(() {
-      _tasks.add(value);
+      _tasks.add(Task(newTask));
     });
+  }
+
+  void _toggleCompleted(Task item, { String? actionType }) {
+    final index = _tasks.indexWhere((element) => element.title == item.title);
+    _tasks[index].isCompleted = !item.isCompleted;
+
+    setState(() {});
+
+    if(actionType == 'Undo') return; // If undo, don't show the snack bar
+
+    const snackBarMessage = 'Task completed';
+    final snackBar = SnackBar(
+      content: const Text(snackBarMessage),
+      action: SnackBarAction(
+        label: 'Undo',
+        onPressed: () {
+          _toggleCompleted(item, actionType: 'Undo');
+        },
+      ),
+    );
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
   @override
@@ -51,12 +74,12 @@ class _TasksState extends State<Tasks> {
           itemBuilder: (BuildContext context, int index) {
             return ListTile(
               leading: Checkbox(
-                value: false,
-                onChanged: (bool? value) {
-                  // TODO
-                },
+                value: _tasks[index].isCompleted,
+                onChanged: (item) => _toggleCompleted(_tasks[index]),
               ),
-              title: Text(_tasks[index]),
+              title: _tasks[index].isCompleted == true
+                  ? Text(_tasks[index].title, style: const TextStyle(decoration: TextDecoration.lineThrough),)
+                  : Text(_tasks[index].title,),
               onTap: () {
                 // TODO
               },
@@ -110,4 +133,13 @@ class _TasksState extends State<Tasks> {
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
+}
+
+class Task {
+  final String title;
+  bool isCompleted = false;
+
+  Task(this.title, { this.isCompleted = false });
+
+  String logTask() => '{$title, $isCompleted}';
 }
