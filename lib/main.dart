@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 
 void main() {
@@ -15,7 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Task List - BLoC',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: const ColorScheme.light(primary: Colors.black),
         useMaterial3: true,
       ),
       home: const Tasks(title: 'Tasks'),
@@ -46,7 +44,7 @@ class _TasksState extends State<Tasks> {
 
     setState(() {});
 
-    if(actionType == 'Undo') return; // If undo, don't show the snack bar
+    if(actionType == 'Undo' || item.isCompleted == false) return;
 
     const snackBarMessage = 'Task completed';
     final snackBar = SnackBar(
@@ -81,7 +79,21 @@ class _TasksState extends State<Tasks> {
                   ? Text(_tasks[index].title, style: const TextStyle(decoration: TextDecoration.lineThrough),)
                   : Text(_tasks[index].title,),
               onTap: () {
-                // TODO
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) {
+                        return Scaffold(
+                          appBar: AppBar(
+                            title: const Text('Tasks'),
+                          ),
+                          body: const Center(
+                            child: Text('Task details go here!'),
+                          ),
+                        );
+                      }
+                  ),
+                );
               },
             );
       })
@@ -137,9 +149,8 @@ class _TasksState extends State<Tasks> {
 
 class Task {
   final String title;
+  final String? description;
   bool isCompleted = false;
 
-  Task(this.title, { this.isCompleted = false });
-
-  String logTask() => '{$title, $isCompleted}';
+  Task(this.title, { this.description, this.isCompleted = false });
 }
