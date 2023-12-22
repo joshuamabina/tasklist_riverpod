@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -16,21 +17,24 @@ class MyApp extends StatelessWidget {
         colorScheme: const ColorScheme.light(primary: Colors.black),
         useMaterial3: true,
       ),
-      home: const Tasks(title: 'Tasks'),
+      home: const Tasks(),
     );
   }
 }
 
 class Tasks extends StatefulWidget {
-  const Tasks({super.key, required this.title});
-  final String title;
+  const Tasks({super.key});
 
   @override
   State<Tasks> createState() => _TasksState();
 }
 
 class _TasksState extends State<Tasks> {
-  final List<Task> _tasks = <Task>[Task('Buy milk', isCompleted: true), Task('Drink coffee'), Task('Build something amazing')];
+  final List<Task> _tasks = <Task>[
+    Task('Buy milk', isCompleted: true),
+    Task('Drink coffee', description: "Sip energy, savor productive moments."),
+    Task('Build something amazing')
+  ];
 
   void _createTask(newTask) {
     setState(() {
@@ -39,10 +43,13 @@ class _TasksState extends State<Tasks> {
   }
 
   void _toggleCompleted(Task item, { String? actionType }) {
-    final index = _tasks.indexWhere((element) => element.title == item.title);
-    _tasks[index].isCompleted = !item.isCompleted;
+    final task = _tasks.firstWhereOrNull((element) => element.title == item.title);
 
-    setState(() {});
+    if (task != null) {
+      setState(() {
+        task.isCompleted = !item.isCompleted;
+      });
+    }
 
     if(actionType == 'Undo' || item.isCompleted == false) return;
 
@@ -64,7 +71,7 @@ class _TasksState extends State<Tasks> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
+        title: const Text("Tasks"),
       ),
       body: _tasks.isNotEmpty
       ? ListView.builder(
@@ -87,8 +94,68 @@ class _TasksState extends State<Tasks> {
                           appBar: AppBar(
                             title: const Text('Tasks'),
                           ),
-                          body: const Center(
-                            child: Text('Task details go here!'),
+                          body: Center(
+                            child: Padding(
+                              padding: const EdgeInsets.all(16),
+                              child: Column(
+                                children: [
+                                  TextFormField(
+                                    style: _tasks[index].isCompleted == true
+                                        ? const TextStyle(fontSize: 32, decoration: TextDecoration.lineThrough)
+                                        : const TextStyle(fontSize: 32),
+                                    initialValue: _tasks[index].title,
+                                    decoration: const InputDecoration(
+                                      border: InputBorder.none,
+                                    ),
+                                  ),
+                                  TextFormField(
+                                    initialValue: _tasks[index].description,
+                                    decoration: const InputDecoration(
+                                      hintText: 'Add description',
+                                      border: InputBorder.none,
+                                    ),
+                                  ),
+                                ],
+                              )
+                            )
+                          ),
+                          bottomNavigationBar: BottomAppBar(
+                            child: Padding(
+                              padding: const EdgeInsets.all(16),
+                              child: GestureDetector(
+                                child: Container(
+                                  alignment: Alignment.centerRight,
+                                  child: _tasks[index].isCompleted == true
+                                      ? const Text('Mark uncompleted', style: TextStyle(fontWeight: FontWeight.bold,))
+                                      : const Text('Mark completed', style: TextStyle(fontWeight: FontWeight.bold,)),
+                                ),
+                                onTap: () {
+                                  final task = _tasks[index];
+
+                                  String snackBarMessage;
+                                  if(task.isCompleted == true) {
+                                    task.isCompleted = !task.isCompleted;
+                                    snackBarMessage = 'Task marked uncompleted';
+                                  } else {
+                                    task.isCompleted = !task.isCompleted;
+                                    snackBarMessage = 'Task marked completed';
+                                  }
+
+                                  setState(() {});
+
+                                  final snackBar = SnackBar(
+                                    content: Text(snackBarMessage),
+                                    action: SnackBarAction(
+                                      label: 'Undo',
+                                      onPressed: () {
+                                        // _toggleCompleted(task, actionType: 'Undo');
+                                      },
+                                    ),
+                                  );
+                                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                },
+                              ),
+                            )
                           ),
                         );
                       }
@@ -153,4 +220,6 @@ class Task {
   bool isCompleted = false;
 
   Task(this.title, { this.description, this.isCompleted = false });
+
+  String getTask() => 'Task: $title';
 }
