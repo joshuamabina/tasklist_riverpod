@@ -4,12 +4,13 @@ A basic introduction to state management in flutter apps using BLoC (Business Lo
 
 ## Features
 
-- List all tasks
-- Create a new tasks
-- Mark task as complete
+- Done: List all tasks
+- Done: Create a new tasks
+- Done: Mark task as complete
 - List all completed tasks
 - Clear completed tasks
-- Add task description
+- Done: Add task description
+- Create a separate stateful widget for task description
 
 ## Getting Started with Flutter
 
