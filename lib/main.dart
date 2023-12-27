@@ -130,6 +130,7 @@ class _TasksState extends State<Tasks> {
                                       : const Text('Mark completed', style: TextStyle(fontWeight: FontWeight.bold,)),
                                 ),
                                 onTap: () {
+
                                   final task = _tasks[index];
 
                                   String snackBarMessage;
@@ -218,6 +219,7 @@ class Task {
   final String title;
   final String? description;
   bool isCompleted = false;
+
 
   Task(this.title, { this.description, this.isCompleted = false });
 
