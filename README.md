@@ -1,24 +1,27 @@
-# Task List BLoC
+# Task List Riverpod
 
-A basic introduction to state management in flutter apps using BLoC (Business Logic Component) design pattern.
+A basic introduction to state management in flutter apps using Riverpod.
 
-## All Features
+See inspiration: https://ticktick.com
 
-Completed:
+## Roadmap
 
-- List all tasks
-- Create a new tasks
-- Mark task as complete
-- Add task description
+**Pending tasks:**
 
-Pending:
+- [ ] Implement storage with sqlite - https://docs.flutter.dev/cookbook/persistence/sqlite
+- [x] List all tasks
+- [x] Create a new tasks
+- [x] Mark task as complete
+- [x] Add task description
 
-- List all completed tasks
-- Clear completed tasks
-- Create a separate stateful widget for task description
-- Capture `createdAt`, `updatedAt`, `completedAt`, `dueAt`
-- Capture subtasks
-- Material3 theming
+**Ideas, issues, and notes:**
+
+- [ ] List all completed tasks
+- [ ] Clear completed tasks
+- [ ] Create a separate stateful widget for task description
+- [ ] Capture `createdAt`, `updatedAt`, `completedAt`, `dueAt`
+- [ ] Capture subtasks
+- [ ] Material3 theming
 
 ## Getting Started with Flutter
 
