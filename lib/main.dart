@@ -1,9 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -12,24 +10,24 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Task List - BLoC',
+      title: 'Task List - Riverpod',
       theme: ThemeData(
         colorScheme: const ColorScheme.light(primary: Colors.black),
         useMaterial3: true,
       ),
-      home: const Tasks(),
+      home: const TaskList(),
     );
   }
 }
 
-class Tasks extends StatefulWidget {
-  const Tasks({super.key});
+class TaskList extends StatefulWidget {
+  const TaskList({super.key});
 
   @override
-  State<Tasks> createState() => _TasksState();
+  State<TaskList> createState() => _TaskListState();
 }
 
-class _TasksState extends State<Tasks> {
+class _TaskListState extends State<TaskList> {
   final List<Task> _tasks = <Task>[
     Task('Buy milk', isCompleted: true),
     Task('Drink coffee', description: "Sip energy, savor productive moments."),
@@ -71,7 +69,7 @@ class _TasksState extends State<Tasks> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text("Tasks"),
+        title: const Text("Task List"),
       ),
       body: _tasks.isNotEmpty
       ? ListView.builder(
@@ -92,7 +90,7 @@ class _TasksState extends State<Tasks> {
                       builder: (context) {
                         return Scaffold(
                           appBar: AppBar(
-                            title: const Text('Tasks'),
+                            title: const Text('Task List'),
                           ),
                           body: Center(
                             child: Padding(
