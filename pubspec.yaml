@@ -1,5 +1,5 @@
-name: tasklist_riverpod
-description: "A basic introduction to state management in flutter apps using Riverpod."
+name: tasklist_provider
+description: "A basic introduction to state management in flutter apps using package Provider."
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 version: 1.0.0+1
@@ -13,18 +13,15 @@ dependencies:
 
   cupertino_icons: ^1.0.2
   collection: ^1.18.0
-  flutter_riverpod: ^2.4.9
-  riverpod_annotation: ^2.3.3
+  provider: ^6.1.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
   flutter_lints: ^2.0.0
-  riverpod_generator: ^2.3.9
   build_runner: ^2.4.7
   custom_lint: ^0.5.7
-  riverpod_lint: ^2.3.7
 
 flutter:
   uses-material-design: true

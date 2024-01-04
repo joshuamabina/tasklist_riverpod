@@ -1,6 +1,6 @@
 # Task List Riverpod
 
-A basic introduction to state management in flutter apps using Riverpod.
+A basic introduction to state management in flutter apps using packag Provider.
 
 See inspiration: https://ticktick.com
 
