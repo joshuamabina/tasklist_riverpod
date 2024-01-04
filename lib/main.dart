@@ -1,5 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+
+import 'models/task.dart';
 // import 'package:provider/provider.dart';
 
 
@@ -215,13 +217,3 @@ class _TaskListState extends State<TaskList> {
   }
 }
 
-class Task {
-  final String title;
-  final String? description;
-  bool isCompleted = false;
-
-
-  Task(this.title, { this.description, this.isCompleted = false });
-
-  String getTask() => 'Task: $title';
-}
