@@ -23,12 +23,15 @@ See inspiration: https://ticktick.com
 - [ ] Capture subtasks
 - [ ] Material3 theming
 
-## Getting Started with Flutter
+## Helpful Links
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
+- [flutter-sample](https://github.com/diegoveloper/flutter-samples)
+- [Movie Details - A sample for creating a nice movie details page UI in Flutter.](https://github.com/roughike/movie-details-ui)
+- [FlutterMates - A quick sample app on how to implement a friend list and a profile page in Flutter.](https://github.com/CodemateLtd/FlutterMates)
+- [fluttergems - An awesome list of open-source flutter apps](https://github.com/fluttergems/awesome-open-source-flutter-apps?tab=readme-ov-file)
+- [Delivery App - Flutter](https://github.com/Frave07/Flutter-Delivery-App)
+- [Templates - Awesome Flutter](https://github.com/Solido/awesome-flutter?tab=readme-ov-file#templates)
+- [Awesome Flutter - A curated list of awesome Flutter libraries, tools, tutorials...](https://github.com/nepaul/awesome-flutter)
 - [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
 - [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
